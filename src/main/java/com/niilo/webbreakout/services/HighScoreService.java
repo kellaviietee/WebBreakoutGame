@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HighScoreService {
 
-    private HighScoreRepository highScoreRepository;
+    private final HighScoreRepository highScoreRepository;
 
     public List<HighScore> getAllHighScores() {
         return highScoreRepository.findAll();
