@@ -12,6 +12,7 @@ import java.util.List;
 public class HighScoreService {
 
     private final HighScoreRepository highScoreRepository;
+    private final PlayerService playerService;
 
     public List<HighScore> getAllHighScores() {
         return highScoreRepository.findAll();
@@ -19,5 +20,16 @@ public class HighScoreService {
 
     public HighScore saveHighScore(HighScore score) {
         return highScoreRepository.save(score);
+    }
+
+    public List<HighScore> saveHighScores(List<HighScore> highScores) {
+        for (HighScore highScore : highScores) {
+            if (playerService.findPlayerByName(highScore.getPlayer().getName()) == null) {
+                highScore.setPlayer(playerService.updatePlayer(highScore.getPlayer()));
+            } else {
+                highScore.setPlayer(playerService.findPlayerByName(highScore.getPlayer().getName()));
+            }
+        }
+        return highScoreRepository.saveAll(highScores);
     }
 }

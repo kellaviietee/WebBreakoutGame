@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,11 @@ public class HighScoreController {
     @PostMapping("/add")
     public ResponseEntity<HighScore> addHighScore(@RequestBody HighScore highScore) {
         return new ResponseEntity<>(highScoreService.saveHighScore(highScore), HttpStatus.OK);
+    }
+
+    @PutMapping("/addall")
+    public ResponseEntity<List<HighScore>> addHighScore(@RequestBody List<HighScore> highScores) {
+        return new ResponseEntity<>(highScoreService.saveHighScores(highScores), HttpStatus.OK);
     }
 
 }
