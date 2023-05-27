@@ -18,6 +18,10 @@ public class HighScoreService {
         return highScoreRepository.findAll();
     }
 
+    public List<HighScore> getTop10HighScores() {
+        return highScoreRepository.findTop10ByOrderByScoreDesc();
+    }
+
     public HighScore saveHighScore(HighScore score) {
         return highScoreRepository.save(score);
     }

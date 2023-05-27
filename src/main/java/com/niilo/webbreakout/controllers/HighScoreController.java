@@ -26,6 +26,11 @@ public class HighScoreController {
         return new ResponseEntity<>(highScoreService.getAllHighScores(), HttpStatus.OK);
     }
 
+    @GetMapping("/top10")
+    public ResponseEntity<List<HighScore>> getTop10HighScores() {
+        return new ResponseEntity<>(highScoreService.getTop10HighScores(), HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<HighScore> addHighScore(@RequestBody HighScore highScore) {
         return new ResponseEntity<>(highScoreService.saveHighScore(highScore), HttpStatus.OK);
