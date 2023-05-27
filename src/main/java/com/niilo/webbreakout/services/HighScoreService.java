@@ -1,6 +1,7 @@
 package com.niilo.webbreakout.services;
 
 import com.niilo.webbreakout.entities.HighScore;
+import com.niilo.webbreakout.entities.Player;
 import com.niilo.webbreakout.repositories.HighScoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,9 @@ public class HighScoreService {
     public List<HighScore> saveHighScores(List<HighScore> highScores) {
         for (HighScore highScore : highScores) {
             if (playerService.findPlayerByName(highScore.getPlayer().getName()) == null) {
-                highScore.setPlayer(playerService.updatePlayer(highScore.getPlayer()));
+                Player player = new Player();
+                player.setName(highScore.getPlayer().getName());
+                highScore.setPlayer(playerService.updatePlayer(player));
             } else {
                 highScore.setPlayer(playerService.findPlayerByName(highScore.getPlayer().getName()));
             }
